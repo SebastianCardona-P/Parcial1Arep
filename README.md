@@ -53,3 +53,6 @@ lista vacia:
 Normal:
 
 ![alt text](image-8.png)
+
+otro ejemplo
+![alt text](image-9.png)

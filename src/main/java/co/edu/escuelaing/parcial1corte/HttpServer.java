@@ -188,7 +188,7 @@ public class HttpServer {
                 totalDiferencia += Math.pow((double) num - mean, 2);
             }
             
-            double desv = Math.sqrt((double) (1 / ( (double) countList - 1) * totalDiferencia));
+            double desv = Math.sqrt((double) ( (double) 1 / ( (double) countList - (double) 1) * totalDiferencia));
 
             response += "{\"status\": \"OK\", \"mean\": \"" + mean + "\"," + "\"stddev\": \"" + desv + "\"," + "\"count\": \"" + countList + "\"" + "}";
         }
