@@ -129,6 +129,11 @@ public class Facade {
                     + "contente-type: application/json\n\r"
                     + "\n\r";
             outputLine += response.toString();
+        } else if (responseCode == 409 ) {
+            outputLine = "HTTP/1.1 409 OK\n\r"
+                    + "contente-type: application/json\n\r"
+                    + "\n\r";
+            outputLine += "{\"status\": \"ERR\", \"error\": \"empty_list\"" + "}";
         } else {
             System.out.println("GET request not worked");
             outputLine = "HTTP/1.1 502 OK\n\r"

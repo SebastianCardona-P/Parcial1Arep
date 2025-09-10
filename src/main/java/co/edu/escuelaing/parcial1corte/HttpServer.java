@@ -187,7 +187,7 @@ public class HttpServer {
             for (Integer num : listStorage) {
                 totalDiferencia += Math.pow((double) num - mean, 2);
             }
-
+            
             double desv = Math.sqrt((double) (1 / (countList - 1) * totalDiferencia));
 
             response += "{\"status\": \"OK\", \"mean\": \"" + mean + "\"," + "\"stddev\": \"" + desv + "\"," + "\"count\": \"" + countList + "\"" + "}";
