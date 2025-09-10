@@ -103,23 +103,30 @@ public class Facade {
         String outputLine;
         URL obj;
 
-        if(path.getPath().startsWith("/add")){
+        if (path.getPath().startsWith("/add")) {
             obj = new URL(GET_URL + path.getPath() + "?" + path.getQuery().replace(" ", ""));
             String[] keyValue = path.getQuery().split("=");
-            
-            if(keyValue.length == 1){
+
+            if (keyValue.length == 1) {
                 outputLine = "HTTP/1.1 400 OK\n\r"
-                    + "contente-type: application/json\n\r"
-                    + "\n\r";
-            outputLine += "{\"status\": \"ERR\", \"error\": \"invalid_number\"}";
-            out.write(outputLine);
-            return;
+                        + "contente-type: application/json\n\r"
+                        + "\n\r";
+                outputLine += "{\"status\": \"ERR\", \"error\": \"invalid_number\"}";
+                out.write(outputLine);
+                return;
+            } else if (!keyValue[1].replace(" ", "").matches("[+-]?\\d*(\\.\\d+)?")) {
+                outputLine = "HTTP/1.1 400 OK\n\r"
+                        + "contente-type: application/json\n\r"
+                        + "\n\r";
+                outputLine += "{\"status\": \"ERR\", \"error\": \"invalid_number\"}";
+                out.write(outputLine);
+                return;
             }
             String stringReal = keyValue[1].replace(" ", "");
-        } else{
+        } else {
             obj = new URL(GET_URL + path.getPath());
         }
-        
+
         System.out.println("URL ESSSSS para el back" + obj.toString());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
@@ -140,7 +147,7 @@ public class Facade {
                     + "contente-type: application/json\n\r"
                     + "\n\r";
             outputLine += response.toString();
-        } else if (responseCode == 409 ) {
+        } else if (responseCode == 409) {
             outputLine = "HTTP/1.1 409 OK\n\r"
                     + "contente-type: application/json\n\r"
                     + "\n\r";
