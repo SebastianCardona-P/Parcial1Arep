@@ -105,6 +105,17 @@ public class Facade {
 
         if(path.getPath().startsWith("/add")){
             obj = new URL(GET_URL + path.getPath() + "?" + path.getQuery().replace(" ", ""));
+            String[] keyValue = path.getQuery().split("=");
+            
+            if(keyValue.length == 1){
+                outputLine = "HTTP/1.1 400 OK\n\r"
+                    + "contente-type: application/json\n\r"
+                    + "\n\r";
+            outputLine += "{\"status\": \"ERR\", \"error\": \"invalid_number\"}";
+            out.write(outputLine);
+            return;
+            }
+            String stringReal = keyValue[1].replace(" ", "");
         } else{
             obj = new URL(GET_URL + path.getPath());
         }

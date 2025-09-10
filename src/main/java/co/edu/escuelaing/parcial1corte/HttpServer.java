@@ -28,7 +28,7 @@ import java.util.Map;
 public class HttpServer {
 
     private static final int PORT = 35000;
-    private static List<Integer> listStorage = new LinkedList<>();
+    private static List<Double> listStorage = new LinkedList<>();
     private static int countList = 0;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, URISyntaxException {
@@ -122,7 +122,7 @@ public class HttpServer {
         String stringReal = path.getQuery().split("=")[1].replace(" ", "");
         System.out.println("mi real es:" + stringReal);
 
-        int real = Integer.parseInt(stringReal);
+        double real = Double.parseDouble(stringReal);
 
         listStorage.add(real);
         countList = listStorage.size();
@@ -173,22 +173,22 @@ public class HttpServer {
             countList = listStorage.size();
 
             int totalSum = 0;
-            for (Integer num : listStorage) {
+            for (Double num : listStorage) {
                 totalSum += num;
             }
             
             System.out.println("total sum: " + totalSum);
             System.out.println("total lista: "+ countList);
-            double mean = totalSum / countList;
+            double mean = totalSum / (double) countList;
             
             System.out.println("mean es: "+ mean);
 
             double totalDiferencia = 0;
-            for (Integer num : listStorage) {
+            for (Double num : listStorage) {
                 totalDiferencia += Math.pow((double) num - mean, 2);
             }
             
-            double desv = Math.sqrt((double) (1 / (countList - 1) * totalDiferencia));
+            double desv = Math.sqrt((double) (1 / ( (double) countList - 1) * totalDiferencia));
 
             response += "{\"status\": \"OK\", \"mean\": \"" + mean + "\"," + "\"stddev\": \"" + desv + "\"," + "\"count\": \"" + countList + "\"" + "}";
         }
