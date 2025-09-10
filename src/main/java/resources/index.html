@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parcial 1 Arep</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Add number</h1>
+        <form action="/add" method="get">
+            <label for="add">add:</label><br>
+            <input type="text" id="add" name="add" value=""><br><br>
+            <input type="button" value="Submit" onclick="loadGetMsg()">
+        </form>
+        <div id="getrespmsg"></div>
+        <script>
+            function loadGetMsg() {
+            let real = document.getElementById("add").value;
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+            document.getElementById("getrespmsg").innerHTML =
+            this.responseText;
+            }
+            xhttp.open("GET", "/add?x=" + real);
+            xhttp.send();
+            }
+        </script>
+
+        <h1>List numbers</h1>
+        <form action="/list" method="get">
+            <label for="list">list numbers:</label><br>
+            <input type="button" value="Submit" onclick="loadGetMsgList()">
+        </form>
+        <div id="getrespmsgList"></div>
+        <script>
+            function loadGetMsgList() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+            document.getElementById("getrespmsgList").innerHTML =
+            this.responseText;
+            }
+            xhttp.open("GET", "/list");
+            xhttp.send();
+            }
+        </script>
+
+        <h1>Clear list</h1>
+        <form action="/clear" method="get">
+            <label for="clear">clear list:</label><br>
+            <input type="button" value="Submit" onclick="loadGetMsgClear()">
+        </form>
+        <div id="getrespmsgClear"></div>
+        <script>
+            function loadGetMsgClear() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+            document.getElementById("getrespmsgClear").innerHTML =
+            this.responseText;
+            }
+            xhttp.open("GET", "/clear");
+            xhttp.send();
+            }
+        </script>
+
+        <h1>Stats</h1>
+        <form action="/stats" method="get">
+            <label for="stats">stats:</label><br>
+            <input type="button" value="Submit" onclick="loadGetMsgstats()">
+        </form>
+        <div id="getrespmsgstats"></div>
+        <script>
+            function loadGetMsgstats() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+            document.getElementById("getrespmsgstats").innerHTML =
+            this.responseText;
+            }
+            xhttp.open("GET", "/stats");
+            xhttp.send();
+            }
+        </script>
+
+
+    </body>
+</html>
